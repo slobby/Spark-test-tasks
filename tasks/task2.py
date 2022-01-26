@@ -39,13 +39,13 @@ def journals_creation():
                    lsd.Normalized_Title AS Medline_Title,
                    lsd.Medline_Title_Abbreviation,
                    CASE
-                        WHEN lsd.ISSN NOT NULL THEN lsd.ISSN
-                        WHEN mfs.ISSN NOT NULL THEN mfs.ISSN
+                        WHEN lsd.ISSN IS NOT NULL THEN lsd.ISSN
+                        WHEN mfs.ISSN IS NOT NULL THEN mfs.ISSN
                         ELSE ''
                    END AS ISSN,
                    CASE
-                        WHEN lsd.eISSN NOT NULL THEN lsd.eISSN
-                        WHEN mfs.eISSN NOT NULL THEN mfs.eISSN
+                        WHEN lsd.eISSN IS NOT NULL THEN lsd.eISSN
+                        WHEN mfs.eISSN IS NOT NULL THEN mfs.eISSN
                         ELSE ''
                    END AS eISSN,
                    lsd.Full_Text_Start_Date,
@@ -54,8 +54,8 @@ def journals_creation():
                    mfs.PUBLISHER
             from lsd
             INNER JOIN mfs
-            ON (lsd.ISSN NOT NULL
-            AND mfs.ISSN NOT NULL
+            ON (lsd.ISSN IS NOT NULL
+            AND mfs.ISSN IS NOT NULL
             AND lsd.ISSN == mfs.ISSN)
             OR lsd.Normalized_Title == mfs.MAGNAME
             """
