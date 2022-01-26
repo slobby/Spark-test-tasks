@@ -1,0 +1,5 @@
+## Spark task
+
+###How to run
+1. switch to tasks folder
+2. run in sequence task1.py, task2.py, task3.py
