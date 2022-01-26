@@ -2,4 +2,7 @@
 
 ###How to run
 1. switch to tasks folder
-2. run in sequence task1.py, task2.py, task3.py
+2. run in sequence
+ - spark-submit task1.py
+ - spark-submit task2.py
+ - spark-submit task3.py
