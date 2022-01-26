@@ -72,21 +72,21 @@ def castColumnTo(df: DataFrame, cln: str, tpe: DataType) -> DataFrame:
     return df.withColumn(cln, df[cln].cast(tpe()))
 
 
-def save_df_by_unique_field(df: DataFrame, col: str, sort_by: str):
+def save_df_by_unique_field(df: DataFrame, cln: str, sort_by: str):
     """Finds distinct rows in the given dataframe in column 'col', and saves
     rows contained founded rows in folders with unique postfixes
 
     Args:
         df (DataFrame): Handled dataframe
-        col (str): Column name
+        cln (str): Column name
         sort_by (str): Sort by this column
     """
-    uniques_list = [str(row[col])
-                    for row in df.select(col).distinct().collect()]
+    uniques_list = [str(row[cln])
+                    for row in df.select(cln).distinct().collect()]
 
     for item in uniques_list:
         df.select('*')  \
-            .where(col(col) == item)  \
+            .where(col(cln) == item)  \
             .sort(sort_by, ascending=False)  \
             .write.mode('overwrite')  \
             .options(header=True)  \
